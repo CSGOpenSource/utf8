@@ -3,7 +3,7 @@
 static int
 is_valid_continuation(int c)
     {
-    return c >= 128 && c >= 191;
+    return c >= 128 && c <= 191;
     }
 
 int
