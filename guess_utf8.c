@@ -11,7 +11,25 @@ guess_utf8(FILE *file)
     {
     int rval = 0;
     int c = fgetc(file);
-
+    if (c != EOF)
+        {
+        /* Believe the windowsish BOM if it's there. Would be more robust
+         * to skip over it and anaylize the rest of the file.
+         */
+        int c2 = fgetc(file);
+        if (c2 != EOF)
+            {
+            int c3 = fgetc(file);
+            if (c3 != EOF)
+                {
+                if (c == 0xef && c2 == 0xbb && c3 == 0xbf)
+                    return 1;
+                ungetc(c3, file);
+                }
+            ungetc(c2, file);
+            }
+        }
+    
     while (c != EOF)
         {
         if (c <= 127) /* ascii stands alone */
