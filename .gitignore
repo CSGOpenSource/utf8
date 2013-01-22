@@ -1,0 +1,3 @@
+*.o
+guess_utf8
+nonascii
