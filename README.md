@@ -1,4 +1,4 @@
 utf8
 ====
 
-text encoding detection utiliites
+Text encoding detection utiliites
