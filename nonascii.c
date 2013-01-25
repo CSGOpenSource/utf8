@@ -20,9 +20,11 @@ nonascii(FILE *file, int should_print)
 
         if (c > 127)
             {
+            any_found = 1;
             if (should_print)
                 printf("(%x) %d:%d\n", c, line, pos);
-            any_found = 1;
+            else
+                break;
             }
 
         c = fgetc(file);
