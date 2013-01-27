@@ -2,7 +2,7 @@
 
 
 int
-nonascii(FILE *file, int should_print)
+nonascii(FILE *file, void (*print)(int, int, int))
     {
     int line = 0;
     int pos = 0;
@@ -21,8 +21,8 @@ nonascii(FILE *file, int should_print)
         if (c > 127)
             {
             any_found = 1;
-            if (should_print)
-                printf("(%x) %d:%d\n", c, line, pos);
+            if (print)
+                print(c, line, pos);
             else
                 break;
             }

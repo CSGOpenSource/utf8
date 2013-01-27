@@ -2,19 +2,24 @@
 
 #include <stdio.h>
 
-int nonascii(FILE *, int);
+int nonascii(FILE *, void (*)(int, int, int));
+
+static void myprint(int c, int line, int pos)
+    {
+    printf("(%x) %d:%d\n", c, line, pos);
+    }
 
 int 
 main(int argc, char *argv[])
     {
-    int should_print = 0;
+    void (*print)(int, int, int) = NULL;
     FILE *the_file = stdin;
     char *the_file_name = NULL;
     if (argc > 1)
         {
         if (argv[1][0] == '-')
             {
-            should_print = 1;
+            print = myprint;
             if (argc > 2)
                 {
                 the_file_name = argv[2];
@@ -41,6 +46,6 @@ main(int argc, char *argv[])
         printf("Scanning %s:\n", argv[2]);
 
     /* reverse logic for shell */
-    return !nonascii(the_file, should_print);
+    return !nonascii(the_file, print);
     }
 
