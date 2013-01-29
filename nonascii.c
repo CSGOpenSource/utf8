@@ -1,3 +1,5 @@
+/* nonascii.c */
+
 #include <stdio.h>
 
 
